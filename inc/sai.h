@@ -141,7 +141,7 @@ typedef enum _sai_api_t
     SAI_API_MY_MAC           = 45, /**< sai_my_mac_api_t */
     SAI_API_IPSEC            = 46, /**< sai_ipsec_api_t */
     SAI_API_GENERIC_PROGRAMMABLE = 47, /**<sai_generic_programmable_t */
-    SAI_API_PERFMON          = 47, /**< sai_perfmon_api_t */
+    SAI_API_PERFMON          = 48, /**< sai_perfmon_api_t */
     SAI_API_MAX,                   /**< total number of APIs */
 } sai_api_t;
 

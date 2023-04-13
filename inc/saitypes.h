@@ -1195,6 +1195,12 @@ typedef struct _sai_port_err_status_list_t
     sai_port_err_status_t *list;
 } sai_port_err_status_list_t;
 
+typedef struct _sai_perfdata_t
+{
+    sai_uint64_t latency;
+    sai_uint32_t num_objects;
+} sai_perfdata_t;
+
 /**
  * @brief Data Type
  *
@@ -1378,6 +1384,9 @@ typedef union _sai_attribute_value_t
 
     /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_IP_PREFIX_LIST */
     sai_ip_prefix_list_t ipprefixlist;
+
+    /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_PERFDATA */
+    sai_perfdata_t perfdata;
 } sai_attribute_value_t;
 
 /**

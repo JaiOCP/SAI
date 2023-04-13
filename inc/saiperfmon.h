@@ -99,10 +99,10 @@ typedef enum _sai_perfmon_attr_t
     /**
      * @brief Performance data as collected
      *
-     * @type sai_uint64_t
+     * @type sai_perfdata_t
      * @flags READ_ONLY
      */
-    SAI_PERFMON_ATTR_PERFMON_DATA,
+    SAI_PERFMON_ATTR_PERFDATA,
 
     /**
      * @brief End of Performance Monitoring attributes

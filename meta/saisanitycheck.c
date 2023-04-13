@@ -710,6 +710,7 @@ void check_attr_object_type_provided(
         case SAI_ATTR_VALUE_TYPE_FABRIC_PORT_REACHABILITY:
         case SAI_ATTR_VALUE_TYPE_PORT_ERR_STATUS_LIST:
         case SAI_ATTR_VALUE_TYPE_IP_PREFIX_LIST:
+        case SAI_ATTR_VALUE_TYPE_PERFDATA:
 
             if (md->allowedobjecttypes != NULL)
             {
@@ -2625,6 +2626,7 @@ void check_attr_is_primitive(
         case SAI_ATTR_VALUE_TYPE_PORT_LANE_LATCH_STATUS_LIST:
         case SAI_ATTR_VALUE_TYPE_JSON:
         case SAI_ATTR_VALUE_TYPE_IP_PREFIX_LIST:
+        case SAI_ATTR_VALUE_TYPE_PERFDATA:
 
             if (md->isprimitive)
             {
