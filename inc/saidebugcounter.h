@@ -64,6 +64,13 @@ typedef enum _sai_debug_counter_type_t
      */
     SAI_DEBUG_COUNTER_TYPE_SWITCH_OUT_DROP_REASONS,
 
+    /**
+     * @brief Switch other debug counters
+     *
+     * Base object: SAI_OBJECT_TYPE_SWITCH.
+     */
+    SAI_DEBUG_COUNTER_TYPE_SWITCH_OTHERS,
+
 } sai_debug_counter_type_t;
 
 /**

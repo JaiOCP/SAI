@@ -2874,6 +2874,14 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_HOSTIF_OPER_STATUS_UPDATE_MODE,
 
     /**
+     * @brief Switch dram buffer size in KB, true only for VOQ switch type
+     *
+     * @type sai_uint64_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_DRAM_BUFFER_SIZE,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
@@ -2973,6 +2981,18 @@ typedef enum _sai_switch_stat_t
 
     /** Switch stat fabric drop reasons range end */
     SAI_SWITCH_STAT_FABRIC_DROP_REASON_RANGE_END = 0x00003fff,
+
+    /** Switch stat others range start */
+    SAI_SWITCH_STAT_OTHERS_RANGE_BASE = 0x00004000,
+
+    /** Switch stat for SRAM packet buffers [VOQ Switch] */
+    SAI_SWITCH_STAT_OTHERS_SRAM_BUFFER_USED = SAI_SWITCH_STAT_OTHERS_RANGE_BASE,
+
+    /** Switch stat for DRAM packet buffers [VOQ Switch] */
+    SAI_SWITCH_STAT_OTHERS_DRAM_SPEED_BUFFER_USED,
+
+    /** Switch stat others range end */
+    SAI_SWITCH_STAT_OTHERS_RANGE_END = 0x00004fff,
 
 } sai_switch_stat_t;
 
