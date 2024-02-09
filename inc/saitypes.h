@@ -295,6 +295,7 @@ typedef enum _sai_object_type_t
     SAI_OBJECT_TYPE_ACL_TABLE_CHAIN_GROUP    = 105,
     SAI_OBJECT_TYPE_TWAMP_SESSION            = 106,
     SAI_OBJECT_TYPE_TAM_COUNTER_SUBSCRIPTION = 107,
+    SAI_OBJECT_TYPE_ARS_PATH_PROFILE         = 108,
 
     /** Must remain in last position */
     SAI_OBJECT_TYPE_MAX,

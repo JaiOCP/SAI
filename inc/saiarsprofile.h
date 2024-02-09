@@ -327,6 +327,60 @@ typedef enum _sai_ars_profile_attr_t
     SAI_ARS_PROFILE_ATTR_QUANT_BAND_7_MAX_THRESHOLD,
 
     /**
+     * @brief ARS path quality update interval in micro seconds
+     *
+     * Messages received as part of ARS quality monitoring are consumed by the switch and HW is updated at this interval. Update interval of 0 indicates that HW update is disabled for remote link quality.
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_PATH_QUALITY_UPDATE,
+
+    /**
+     * @brief ARS local link quality monitor interval (in micro seconds).
+     *
+     * Monitoring interval of 0 indicates that monitoring of local link quality is disabled.
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_LOCAL_LINK_QUALITY_MONITOR_INTERVAL,
+
+    /**
+     * @brief ARS local link quality monitor generates message based on the user configured threshold.
+     * Message interval of 0 indicates that generation of message is disabled.
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_MESSAGE_INTERVAL,
+
+    /**
+     * @brief ARS local link quality message transport.
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_TAM_TRANSPORT
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_MESSAGE_TRANSPORT,
+
+    /**
+     * @brief ARS message encap information
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_TAM_COLLECTOR
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_MESSAGE_ENCAP,
+
+    /**
      * @brief End of attributes
      */
     SAI_ARS_PROFILE_ATTR_END,

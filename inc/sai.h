@@ -27,6 +27,7 @@
 
 #include "saiacl.h"
 #include "saiars.h"
+#include "saiarspathprofile.h"
 #include "saiarsprofile.h"
 #include "saibridge.h"
 #include "saibuffer.h"
@@ -146,6 +147,7 @@ typedef enum _sai_api_t
     SAI_API_ARS              = 48, /**<sai_ars_api_t */
     SAI_API_ARS_PROFILE      = 49, /**<sai_ars_api_profile_t */
     SAI_API_TWAMP            = 50, /**< sai_twamp_api_t */
+    SAI_API_ARS_PATH_PROFILE = 51, /**<sai_ars_api_path_profile_t */
     SAI_API_MAX,                   /**< total number of APIs */
 
     /** Custom range base value */

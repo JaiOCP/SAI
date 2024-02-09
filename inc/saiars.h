@@ -161,6 +161,16 @@ typedef enum _sai_ars_attr_t
     SAI_ARS_ATTR_ALTERNATE_PATH_BIAS,
 
     /**
+     * @brief ARS path profile list
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_ARS_PATH_PROFILE
+     * @default empty
+     */
+    SAI_ARS_ATTR_PATH_PROFILE_LIST,
+
+    /**
      * @brief End of attributes
      */
     SAI_ARS_ATTR_END,
