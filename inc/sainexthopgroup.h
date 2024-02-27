@@ -56,6 +56,9 @@ typedef enum _sai_next_hop_group_type_t
     /** Next hop group is class-based, with members selected by Forwarding class */
     SAI_NEXT_HOP_GROUP_TYPE_CLASS_BASED,
 
+    /** Next hop group is type remote */
+    SAI_NEXT_HOP_GROUP_TYPE_REMOTE,
+
     /* Other types of next hop group to be defined in the future, e.g., WCMP */
 
 } sai_next_hop_group_type_t;
@@ -231,6 +234,17 @@ typedef enum _sai_next_hop_group_attr_t
      * @flags READ_ONLY
      */
     SAI_NEXT_HOP_GROUP_ATTR_ARS_PORT_REASSIGNMENTS,
+
+    /**
+     * @brief ARS path profile list
+     * This attribute is valid only if its an overlay nexthop group
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_ARS_PATH_PROFILE
+     * @default empty
+     */
+    SAI_NEXT_HOP_GROUP_ATTR_ARS_PATH_PROFILE_LIST,
 
     /**
      * @brief End of attributes

@@ -34,25 +34,6 @@
  */
 
 /**
- * @brief Adaptive routing and switching path profile type
- */
-typedef enum _sai_ars_path_profile_type_t
-{
-    /** Publisher of ARS messages */
-    SAI_ARS_PATH_PROFILE_TYPE_PUBLISHER,
-
-    /** Subscriber of ARS messages */
-    SAI_ARS_PATH_PROFILE_TYPE_SUBSCRIBER,
-
-    /** Publisher and Subscriber of ARS messages */
-    SAI_ARS_PATH_PROFILE_TYPE_BOTH,
-
-    /** No action of ARS messages */
-    SAI_ARS_PATH_PROFILE_TYPE_NONE,
-
-} sai_ars_path_profile_type_t;
-
-/**
  * @brief Attribute id for ARS path profile
  */
 typedef enum _sai_ars_path_profile_attr_t
@@ -63,24 +44,14 @@ typedef enum _sai_ars_path_profile_attr_t
     SAI_ARS_PATH_PROFILE_ATTR_START,
 
     /**
-     * @brief ARS profile type
-     *
-     * @type sai_ars_path_profile_type_t
-     * @flags CREATE_AND_SET
-     * @default SAI_ARS_PATH_PROFILE_TYPE_NONE
-     */
-    SAI_ARS_PATH_PROFILE_ATTR_TYPE = SAI_ARS_PATH_PROFILE_ATTR_START,
-
-    /**
      * @brief Monitoring ports for publisher
      *
      * @type sai_object_list_t
      * @flags CREATE_AND_SET
      * @objects SAI_OBJECT_TYPE_PORT
      * @default empty
-     * @validonly SAI_ARS_PATH_PROFILE_ATTR_TYPE == SAI_ARS_PATH_PROFILE_TYPE_PUBLISHER or SAI_ARS_PATH_PROFILE_ATTR_TYPE == SAI_ARS_PATH_PROFILE_TYPE_BOTH
      */
-    SAI_ARS_PATH_PROFILE_ATTR_MON_PORT_LIST,
+    SAI_ARS_PATH_PROFILE_ATTR_MON_PORT_LIST = SAI_ARS_PATH_PROFILE_ATTR_START,
 
     /**
      * @brief Publish set of ports
@@ -89,12 +60,12 @@ typedef enum _sai_ars_path_profile_attr_t
      * @flags CREATE_AND_SET
      * @objects SAI_OBJECT_TYPE_PORT
      * @default empty
-     * @validonly SAI_ARS_PATH_PROFILE_ATTR_TYPE == SAI_ARS_PATH_PROFILE_TYPE_PUBLISHER or SAI_ARS_PATH_PROFILE_ATTR_TYPE == SAI_ARS_PATH_PROFILE_TYPE_BOTH
      */
     SAI_ARS_PATH_PROFILE_ATTR_PUB_PORT_LIST,
 
     /**
-     * @brief Remote switch identifier list
+     * @brief Remote switch identifier list for each monitoring ports
+     * It can be an arbitrary assigned value or a loopback IP address
      *
      * @type sai_u32_list_t
      * @flags CREATE_AND_SET

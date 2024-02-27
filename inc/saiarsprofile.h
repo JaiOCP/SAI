@@ -381,6 +381,32 @@ typedef enum _sai_ars_profile_attr_t
     SAI_ARS_PROFILE_ATTR_ARS_MESSAGE_ENCAP,
 
     /**
+     * @brief Maximum number of ARS path profiles
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_ARS_PROFILE_ATTR_MAX_PATH_PROFILES,
+
+    /**
+     * @brief Configured number of ARS path profiles
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_ONLY
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_NUM_PATH_PROFILES,
+
+    /**
+     * @brief Configured number of ARS paths
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_ONLY
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_NUM_PATHS,
+
+    /**
      * @brief End of attributes
      */
     SAI_ARS_PROFILE_ATTR_END,
