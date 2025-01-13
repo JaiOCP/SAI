@@ -481,6 +481,10 @@ typedef enum _sai_tam_int_type_t
      */
     SAI_TAM_INT_TYPE_PATH_TRACING,
 
+    /**
+     * @brief INT type Congestion Signalling
+     */
+    SAI_TAM_INT_TYPE_CSIG,
 } sai_tam_int_type_t;
 
 /**
@@ -509,8 +513,12 @@ typedef enum _sai_tam_int_presence_type_t
     /**
      * @brief INT presence type DSCP
      */
-    SAI_TAM_INT_PRESENCE_TYPE_DSCP
+    SAI_TAM_INT_PRESENCE_TYPE_DSCP,
 
+    /**
+     * @brief INT presence type Ether Type Code Point
+     */
+    SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE,
 } sai_tam_int_presence_type_t;
 
 /**
@@ -533,6 +541,7 @@ typedef enum _sai_tam_int_attr_t
 
     /**
      * @brief Device Identifier
+     * For CSIG this is the locator metadata
      *
      * @type sai_uint32_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
@@ -797,6 +806,45 @@ typedef enum _sai_tam_int_attr_t
      * @default SAI_NULL_OBJECT_ID
      */
     SAI_TAM_INT_ATTR_REPORT_ID,
+
+    /**
+     * @brief Ethernet code point value that indicates presence of CSIG in a packet
+     *
+     * @type sai_uint8_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     * @condition SAI_TAM_INT_ATTR_INT_PRESENCE_TYPE == SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE and SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_INT_PRESENCE_ETH_TYPE,
+
+    /**
+     * @brief Enable min available bandwidth signal: min(ABW)
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_MIN_ABW,
+
+    /**
+     * @brief Enable relative min available bandwidth signal: min(ABW/C)
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_MIN_ABW_C,
+
+    /**
+     * @brief Enable maximum per hop delay signal: max(Delay)
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_MAX_HOP_DELAY,
 
     /**
      * @brief End of Attributes

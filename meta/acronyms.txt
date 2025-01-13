@@ -1,4 +1,5 @@
 # this file defines acronyms, one acronym per line
+ABW - Available Bandwidth
 ACL - Access Control List
 AES - Advanced Encryption Standard
 AN - Association Number
@@ -26,6 +27,7 @@ CMIS - Common Management Interface Specification
 CPLD - Complex programmable logic device
 CPU - Central Processing Unit
 CRC - Cyclic Redundancy Code
+CSIG - Congestion Signaling
 DHCP - Dynamic Host Configuration Protocol
 DHCPV6 - Dynamic Host Configuration Protocol for IPv6
 DLD - Dead Lock Detection
