@@ -847,6 +847,19 @@ typedef enum _sai_tam_int_attr_t
     SAI_TAM_INT_ATTR_CSIG_MAX_HOP_DELAY,
 
     /**
+     * @brief Terminate the CSIG header
+     * This is true for CSIG packet egressing on the port
+     * where TAM object binding is done. Packet without CSIG
+     * header is forwarded if this attribute is set to true.
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_TERM,
+
+    /**
      * @brief End of Attributes
      */
     SAI_TAM_INT_ATTR_END,
