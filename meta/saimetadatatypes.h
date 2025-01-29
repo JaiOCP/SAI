@@ -495,6 +495,11 @@ typedef enum _sai_attr_value_type_t
      * @brief Attribute value is the POE port consumption data.
      */
     SAI_ATTR_VALUE_TYPE_POE_PORT_POWER_CONSUMPTION,
+
+    /**
+     * @brief Attribute value is my address list.
+     */
+    SAI_ATTR_VALUE_TYPE_ARS_ADJUST_LIST,
 } sai_attr_value_type_t;
 
 /**

@@ -174,6 +174,109 @@ typedef enum _sai_ars_attr_t
 } sai_ars_attr_t;
 
 /**
+ * @brief Attribute id for ARS quality map
+ */
+typedef enum _sai_ars_quality_map_attr_t
+{
+    /**
+     * @brief Start of attributes
+     */
+    SAI_ARS_QUALITY_MAP_ATTR_START,
+
+    /**
+     * @brief Port list
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_PORT
+     * @default empty
+     */
+    SAI_ARS_QUALITY_MAP_ATTR_PORT_LIST = SAI_ARS_QUALITY_MAP_ATTR_START,
+
+    /**
+     * @brief Quality adjustment value for corresponding port in the port list attribute
+     * Make sure to keep same count in both port list and adjust list
+     *
+     * @type sai_ars_adjust_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     */
+    SAI_ARS_QUALITY_MAP_ATTR_ADJUST_LIST,
+
+    /**
+     * @brief Max quality maps supported
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_ARS_QUALITY_MAP_ATTR_MAX_QUAITY_MAPS,
+
+    /**
+     * @brief End of attributes
+     */
+    SAI_ARS_QUALITY_MAP_ATTR_END,
+
+    /** Custom range base value */
+    SAI_ARS_QUALITY_MAP_ATTR_CUSTOM_RANGE_START = 0x10000000,
+
+    /** End of custom range base */
+    SAI_ARS_QUALITY_MAP_ATTR_CUSTOM_RANGE_END
+
+} sai_ars_quality_map_attr_t;
+
+/**
+ * @brief Create ARS Quality Map
+ *
+ * @param[out] ars_quality_map_id ARS Quality Map Id
+ * @param[in] switch_id Switch id
+ * @param[in] attr_count Number of attributes
+ * @param[in] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_create_ars_quality_map_fn)(
+        _Out_ sai_object_id_t *ars_quality_map_id,
+        _In_ sai_object_id_t switch_id,
+        _In_ uint32_t attr_count,
+        _In_ const sai_attribute_t *attr_list);
+
+/**
+ * @brief Remove ARS Quality Map Id
+ *
+ * @param[in] ars_quality_map_id ARS Path Quality id to be removed.
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_remove_ars_quality_map_fn)(
+        _In_ sai_object_id_t ars_quality_map_id);
+
+/**
+ * @brief Set attributes for ARS Quality Map
+ *
+ * @param[in] ars_quality_map_id ARS Quality Map Id
+ * @param[in] attr Attribute to set
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_set_ars_quality_map_attribute_fn)(
+        _In_ sai_object_id_t ars_quality_map_id,
+        _In_ const sai_attribute_t *attr);
+
+/**
+ * @brief Get attributes of ARS Quality Map
+ *
+ * @param[in] ars_quality_map_id ARS Quality Map Id
+ * @param[in] attr_count Number of attributes
+ * @param[inout] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_get_ars_quality_map_attribute_fn)(
+        _In_ sai_object_id_t ars_quality_map_id,
+        _In_ uint32_t attr_count,
+        _Inout_ sai_attribute_t *attr_list);
+
+/**
  * @brief Create adaptive routing and switching object
  *
  * @param[out] ars_id Adaptive routing and switching id
@@ -230,10 +333,16 @@ typedef sai_status_t (*sai_get_ars_attribute_fn)(
  */
 typedef struct _sai_ars_api_t
 {
-    sai_create_ars_fn               create_ars;
-    sai_remove_ars_fn               remove_ars;
-    sai_set_ars_attribute_fn        set_ars_attribute;
-    sai_get_ars_attribute_fn        get_ars_attribute;
+    sai_create_ars_fn                    create_ars;
+    sai_remove_ars_fn                    remove_ars;
+    sai_set_ars_attribute_fn             set_ars_attribute;
+    sai_get_ars_attribute_fn             get_ars_attribute;
+
+    sai_create_ars_quality_map_fn        create_ars_quality_map;
+    sai_remove_ars_quality_map_fn        remove_ars_quality_map;
+    sai_set_ars_quality_map_attribute_fn set_ars_quality_map_attribute;
+    sai_get_ars_quality_map_attribute_fn get_ars_quality_map_attribute;
+
 } sai_ars_api_t;
 
 /**
