@@ -3198,6 +3198,17 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_SHARED_BUFFER_CELL_SIZE,
 
     /**
+     * @brief Callback for completion status of all the MACSEC ports serviced by this MACSEC engine
+     *
+     * Use sai_macsec_post_status_notification_fn as notification function.
+     *
+     * @type sai_pointer_t sai_macsec_post_status_notification_fn
+     * @flags CREATE_AND_SET
+     * @default NULL
+     */
+    SAI_SWITCH_ATTR_MACSEC_POST_STATUS_NOTIFY,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
