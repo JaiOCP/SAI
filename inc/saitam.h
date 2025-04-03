@@ -488,6 +488,75 @@ typedef enum _sai_tam_int_type_t
 } sai_tam_int_type_t;
 
 /**
+ * @brief CSIG bandwidth computation time interval
+ */
+typedef enum _sai_tam_int_bw_time_interval_t
+{
+    /**
+     * @brief Time interval 128 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_128,
+
+    /**
+     * @brief Time interval 256 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_256,
+
+    /**
+     * @brief Time interval 384 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_384,
+
+    /**
+     * @brief Time interval 512 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_512,
+
+    /**
+     * @brief Time interval 640 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_640,
+
+    /**
+     * @brief Time interval 768 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_768,
+
+    /**
+     * @brief Time interval 896 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_896,
+
+    /**
+     * @brief Time interval 1024 units
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_1024,
+
+} sai_tam_int_bw_time_interval_t;
+
+/**
+ * @brief CSIG bandwidth time interval units
+ */
+typedef enum _sai_tam_int_bw_time_interval_unit_t
+{
+    /**
+     * @brief Time interval unit nanosecond
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_NANOSEC,
+
+    /**
+     * @brief Time interval unit microsecond
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_USEC,
+
+    /**
+     * @brief Time interval unit millisecond
+     */
+    SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_MSEC,
+
+} sai_tam_int_bw_time_interval_unit_t;
+
+/**
  * @brief Type of indication of INT presence in a packet
  */
 typedef enum _sai_tam_int_presence_type_t
@@ -845,6 +914,57 @@ typedef enum _sai_tam_int_attr_t
      * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
      */
     SAI_TAM_INT_ATTR_CSIG_MAX_HOP_DELAY,
+
+    /**
+     * @brief Enable maximum per hop normalized queue delay signal: max(NQD)
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_MAX_NQD,
+
+    /**
+     * @brief Strip the CSIG header and forward the packet
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_STRIP_AND_FORWARD,
+
+    /**
+     * @brief Update the D bit indicating the packet is trimmed
+     * DSCP value configured for TRIM packets comes from the TRIM configuration
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_CSIG_DBIT,
+
+    /**
+     * @brief Minimum time interval for bandwidth computation
+     *
+     * @type sai_tam_int_bw_time_interval_t
+     * @flags CREATE_AND_SET
+     * @default SAI_TAM_INT_BW_TIME_INTERVAL_128
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_BW_TIME_INTERVAL,
+
+    /**
+     * @brief Bandwidth time interval units
+     *
+     * @type sai_tam_int_bw_time_interval_unit_t
+     * @flags CREATE_AND_SET
+     * @default SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_USEC
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     */
+    SAI_TAM_INT_ATTR_BW_TIME_INTERVAL_UNIT,
 
     /**
      * @brief End of Attributes
