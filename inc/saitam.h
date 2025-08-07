@@ -482,79 +482,15 @@ typedef enum _sai_tam_int_type_t
     SAI_TAM_INT_TYPE_PATH_TRACING,
 
     /**
-     * @brief INT type Congestion Signalling
+     * @brief INT type Congestion Signalling compact tag
      */
-    SAI_TAM_INT_TYPE_CSIG,
+    SAI_TAM_INT_TYPE_CSIG_COMPACT,
+
+    /**
+     * @brief INT type Congestion Signalling wide tag
+     */
+    SAI_TAM_INT_TYPE_CSIG_WIDE,
 } sai_tam_int_type_t;
-
-/**
- * @brief CSIG bandwidth computation time interval
- */
-typedef enum _sai_tam_int_bw_time_interval_t
-{
-    /**
-     * @brief Time interval 128 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_128,
-
-    /**
-     * @brief Time interval 256 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_256,
-
-    /**
-     * @brief Time interval 384 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_384,
-
-    /**
-     * @brief Time interval 512 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_512,
-
-    /**
-     * @brief Time interval 640 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_640,
-
-    /**
-     * @brief Time interval 768 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_768,
-
-    /**
-     * @brief Time interval 896 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_896,
-
-    /**
-     * @brief Time interval 1024 units
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_1024,
-
-} sai_tam_int_bw_time_interval_t;
-
-/**
- * @brief CSIG bandwidth time interval units
- */
-typedef enum _sai_tam_int_bw_time_interval_unit_t
-{
-    /**
-     * @brief Time interval unit nanosecond
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_NANOSEC,
-
-    /**
-     * @brief Time interval unit microsecond
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_USEC,
-
-    /**
-     * @brief Time interval unit millisecond
-     */
-    SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_MSEC,
-
-} sai_tam_int_bw_time_interval_unit_t;
 
 /**
  * @brief Type of indication of INT presence in a packet
@@ -877,13 +813,22 @@ typedef enum _sai_tam_int_attr_t
     SAI_TAM_INT_ATTR_REPORT_ID,
 
     /**
-     * @brief Ethernet code point value that indicates presence of CSIG in a packet
+     * @brief Ethernet code point value that indicates presence of CSIG compact tag in a packet
      *
      * @type sai_uint8_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
-     * @condition SAI_TAM_INT_ATTR_INT_PRESENCE_TYPE == SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE and SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @condition SAI_TAM_INT_ATTR_INT_PRESENCE_TYPE == SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE and SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT
      */
-    SAI_TAM_INT_ATTR_INT_PRESENCE_ETH_TYPE,
+    SAI_TAM_INT_ATTR_ETH_TYPE_CSIG_COMPACT,
+
+    /**
+     * @brief Ethernet code point value that indicates presence of CSIG wide tag in a packet
+     *
+     * @type sai_uint8_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     * @condition SAI_TAM_INT_ATTR_INT_PRESENCE_TYPE == SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE and SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_ETH_TYPE_CSIG_WIDE,
 
     /**
      * @brief Enable min available bandwidth signal: min(ABW)
@@ -891,7 +836,7 @@ typedef enum _sai_tam_int_attr_t
      * @type bool
      * @flags CREATE_AND_SET
      * @default false
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
     SAI_TAM_INT_ATTR_CSIG_MIN_ABW,
 
@@ -901,7 +846,7 @@ typedef enum _sai_tam_int_attr_t
      * @type bool
      * @flags CREATE_AND_SET
      * @default false
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
     SAI_TAM_INT_ATTR_CSIG_MIN_ABW_C,
 
@@ -911,7 +856,7 @@ typedef enum _sai_tam_int_attr_t
      * @type bool
      * @flags CREATE_AND_SET
      * @default false
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
     SAI_TAM_INT_ATTR_CSIG_MAX_HOP_DELAY,
 
@@ -921,7 +866,7 @@ typedef enum _sai_tam_int_attr_t
      * @type bool
      * @flags CREATE_AND_SET
      * @default false
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
     SAI_TAM_INT_ATTR_CSIG_MAX_NQD,
 
@@ -931,7 +876,7 @@ typedef enum _sai_tam_int_attr_t
      * @type bool
      * @flags CREATE_AND_SET
      * @default false
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
     SAI_TAM_INT_ATTR_CSIG_STRIP_AND_FORWARD,
 
@@ -942,29 +887,19 @@ typedef enum _sai_tam_int_attr_t
      * @type bool
      * @flags CREATE_AND_SET
      * @default false
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
-    SAI_TAM_INT_ATTR_CSIG_DBIT,
+    SAI_TAM_INT_ATTR_CSIG_D_BIT,
 
     /**
-     * @brief Minimum time interval for bandwidth computation
+     * @brief Time interval for bandwidth computation in nanosecond
      *
-     * @type sai_tam_int_bw_time_interval_t
+     * @type sai_uint32_t
      * @flags CREATE_AND_SET
-     * @default SAI_TAM_INT_BW_TIME_INTERVAL_128
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
+     * @default 256
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
      */
     SAI_TAM_INT_ATTR_BW_TIME_INTERVAL,
-
-    /**
-     * @brief Bandwidth time interval units
-     *
-     * @type sai_tam_int_bw_time_interval_unit_t
-     * @flags CREATE_AND_SET
-     * @default SAI_TAM_INT_BW_TIME_INTERVAL_UNIT_USEC
-     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG
-     */
-    SAI_TAM_INT_ATTR_BW_TIME_INTERVAL_UNIT,
 
     /**
      * @brief End of Attributes
