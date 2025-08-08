@@ -902,6 +902,80 @@ typedef enum _sai_tam_int_attr_t
     SAI_TAM_INT_ATTR_BW_TIME_INTERVAL,
 
     /**
+     * @brief Number of quantization bands support for compact CSIG tag
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     * @default 32
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT
+     */
+    SAI_TAM_INT_ATTR_QUANT_BANDS,
+
+    /**
+     * @brief Minimum threshold used for quantization bands for past load
+     *
+     * @type sai_u32_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT
+     */
+    SAI_TAM_INT_ATTR_QUANT_BAND_MIN_THRESHOLD_LIST,
+
+    /**
+     * @brief Maximum threshold used for quantization bands for past load
+     *
+     * @type sai_u32_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT
+     */
+    SAI_TAM_INT_ATTR_QUANT_BAND_MAX_THRESHOLD_LIST,
+
+    /**
+     * @brief Base value for CSIG wide tag quantization. Must be power of 2
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_BASE_VALUE,
+
+    /**
+     * @brief Step value for CSIG wide tag quantization. Must be power of 2
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_STEP_VALUE,
+
+    /**
+     * @brief Number of quantization bands support for CSIG wide tag
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_BANDS,
+
+    /**
+     * @brief Minimum threshold used for quantization bands for CSIG wide tag
+     *
+     * @type sai_u32_list_t
+     * @flags READ_ONLY
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_BAND_MIN_THRESHOLD_LIST,
+
+    /**
+     * @brief Maximum threshold used for quantization bands for CSIG wide tag
+     *
+     * @type sai_u32_list_t
+     * @flags READ_ONLY
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_BAND_MAX_THRESHOLD_LIST,
+
+    /**
      * @brief End of Attributes
      */
     SAI_TAM_INT_ATTR_END,
