@@ -423,13 +423,9 @@ typedef enum _sai_next_hop_group_member_attr_t
     /**
      * @brief Attach an ARS quality map
      *
-     * When it is empty, then no quality adjustment is done
-     *
      * @type sai_object_id_t
-     * @flags CREATE_AND_SET
+     * @flags READ_ONLY
      * @objects SAI_OBJECT_TYPE_ARS_QUALITY_MAP
-     * @allownull true
-     * @default SAI_NULL_OBJECT_ID
      */
     SAI_NEXT_HOP_GROUP_MEMBER_ATTR_ARS_QUALITY_MAP,
 

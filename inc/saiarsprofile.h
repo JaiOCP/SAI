@@ -462,6 +462,14 @@ typedef enum _sai_ars_profile_attr_t
     SAI_ARS_PROFILE_ATTR_MAX_FLOWS,
 
     /**
+     * @brief Max quality maps supported
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_ARS_PROFILE_ATTR_MAX_QUAITY_MAPS,
+
+    /**
      * @brief End of attributes
      */
     SAI_ARS_PROFILE_ATTR_END,

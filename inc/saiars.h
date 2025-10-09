@@ -204,12 +204,15 @@ typedef enum _sai_ars_quality_map_attr_t
     SAI_ARS_QUALITY_MAP_ATTR_ADJUST_LIST,
 
     /**
-     * @brief Max quality maps supported
+     * @brief L1 Next hop member
      *
-     * @type sai_uint32_t
-     * @flags READ_ONLY
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_NEXT_HOP_GROUP_MEMBER
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
      */
-    SAI_ARS_QUALITY_MAP_ATTR_MAX_QUAITY_MAPS,
+    SAI_ARS_QUALITY_MAP_ATTR_NEXT_HOP_MEMBER,
 
     /**
      * @brief End of attributes
