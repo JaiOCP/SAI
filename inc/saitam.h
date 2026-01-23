@@ -484,6 +484,15 @@ typedef enum _sai_tam_int_type_t
      */
     SAI_TAM_INT_TYPE_PATH_TRACING,
 
+    /**
+     * @brief INT type Congestion Signaling compact tag
+     */
+    SAI_TAM_INT_TYPE_CSIG_COMPACT,
+
+    /**
+     * @brief INT type Congestion Signaling wide tag
+     */
+    SAI_TAM_INT_TYPE_CSIG_WIDE,
 } sai_tam_int_type_t;
 
 /**
@@ -512,8 +521,12 @@ typedef enum _sai_tam_int_presence_type_t
     /**
      * @brief INT presence type DSCP
      */
-    SAI_TAM_INT_PRESENCE_TYPE_DSCP
+    SAI_TAM_INT_PRESENCE_TYPE_DSCP,
 
+    /**
+     * @brief INT presence type Ether Type Code Point
+     */
+    SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE,
 } sai_tam_int_presence_type_t;
 
 /**
@@ -800,6 +813,99 @@ typedef enum _sai_tam_int_attr_t
      * @default SAI_NULL_OBJECT_ID
      */
     SAI_TAM_INT_ATTR_REPORT_ID,
+
+    /**
+     * @brief Ethernet code point value that indicates presence of CSIG compact tag in a packet
+     *
+     * @type sai_uint16_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     * @isvlan false
+     * @condition SAI_TAM_INT_ATTR_INT_PRESENCE_TYPE == SAI_TAM_INT_PRESENCE_TYPE_ETH_TYPE
+     */
+    SAI_TAM_INT_ATTR_ETH_TYPE_CODE_POINT,
+
+    /**
+     * @brief CSIG signal type
+     *
+     * @type sai_csig_signal_type_t
+     * @flags CREATE_AND_SET
+     * @default SAI_CSIG_SIGNAL_TYPE_ABW
+     */
+    SAI_TAM_INT_ATTR_CSIG_SIGNAL_TYPE,
+
+    /**
+     * @brief Time interval for bandwidth computation in microseconds
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 128
+     * @validonly SAI_TAM_INT_ATTR_CSIG_SIGNAL_TYPE == SAI_CSIG_SIGNAL_TYPE_ABW or SAI_TAM_INT_ATTR_CSIG_SIGNAL_TYPE == SAI_CSIG_SIGNAL_TYPE_ABWC
+     */
+    SAI_TAM_INT_ATTR_BW_TIME_INTERVAL,
+
+    /**
+     * @brief Number of quantization bands
+     * Compact tag supports maximum of 32 bands and wide tag supports maximum of 1048576 bands
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 32
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_QUANT_BANDS,
+
+    /**
+     * @brief Quantization bands identifier
+     * Number of identifiers specified MUST match the number of quantization bands configured for compact tag
+     *
+     * @type sai_u16_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_QUANT_BAND_ID,
+
+    /**
+     * @brief Quantization band range values for compact tag
+     *
+     * @type sai_u64_range_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_QUANT_BAND_UINT64_RANGE_LIST,
+
+    /**
+     * @brief Base value for wide tag quantization. Must be 0 or power of 2
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_BASE_VALUE,
+
+    /**
+     * @brief Step value for wide tag quantization. Must be power of 2
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 1
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_WIDE_QUANT_STEP_VALUE,
+
+    /**
+     * @brief Update the D bit indicating the packet is trimmed
+     * DSCP value configured for TRIM packets comes from the TRIM configuration
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_COMPACT or SAI_TAM_INT_ATTR_TYPE == SAI_TAM_INT_TYPE_CSIG_WIDE
+     */
+    SAI_TAM_INT_ATTR_CSIG_D_BIT,
 
     /**
      * @brief End of Attributes

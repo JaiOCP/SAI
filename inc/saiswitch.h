@@ -3551,6 +3551,22 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_LINK_UP_DEBOUNCE_TIMEOUT,
 
     /**
+     * @brief Maximum number of timers supported for CSIG bandwidth signal
+     *
+     * @type sai_uint8_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_CSIG_TIMERS,
+
+    /**
+     * @brief CSIG Bandwidth time intervals supported in microseconds valid only for available and relative available bandwidth signal type
+     *
+     * @type sai_u32_list_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_CSIG_BW_TIME_INTERVAL_IN_USEC,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
