@@ -65,6 +65,9 @@ typedef enum _sai_next_hop_group_type_t
     /** Next hop group is for bridge port */
     SAI_NEXT_HOP_GROUP_TYPE_BRIDGE_PORT,
 
+    /** Next hop group is type remote */
+    SAI_NEXT_HOP_GROUP_TYPE_REMOTE,
+
     /* Other types of next hop group to be defined in the future, e.g., WCMP */
 
 } sai_next_hop_group_type_t;
@@ -469,6 +472,15 @@ typedef enum _sai_next_hop_group_member_attr_t
      * @default false
      */
     SAI_NEXT_HOP_GROUP_MEMBER_ATTR_ARS_ALTERNATE_PATH,
+
+    /**
+     * @brief Attach an ARS quality map
+     *
+     * @type sai_object_id_t
+     * @flags READ_ONLY
+     * @objects SAI_OBJECT_TYPE_ARS_QUALITY_MAP
+     */
+    SAI_NEXT_HOP_GROUP_MEMBER_ATTR_ARS_QUALITY_MAP,
 
     /**
      * @brief End of attributes

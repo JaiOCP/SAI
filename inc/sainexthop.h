@@ -55,6 +55,10 @@ typedef enum _sai_next_hop_type_t
 
     /** Next hop group is for bridge port */
     SAI_NEXT_HOP_TYPE_BRIDGE_PORT,
+
+    /** Next hop is type remote */
+    SAI_NEXT_HOP_TYPE_REMOTE,
+
 } sai_next_hop_type_t;
 
 /**

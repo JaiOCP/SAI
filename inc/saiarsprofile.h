@@ -44,6 +44,41 @@ typedef enum _sai_ars_profile_algo_t
 } sai_ars_profile_algo_t;
 
 /**
+ * @brief ARS Scale Mode
+ */
+typedef enum _sai_ars_profile_scale_mode_t
+{
+    /** Scale Mode 64 x 512 */
+    SAI_ARS_PROFILE_SCALE_MODE_LO,
+
+    /** Scale Mode 1k x 64 */
+    SAI_ARS_PROFILE_SCALE_MODE_MED,
+
+    /** Scale Mode 2k x 32 */
+    SAI_ARS_PROFILE_SCALE_MODE_HIGH,
+
+} sai_ars_profile_scale_mode_t;
+
+/**
+ * @brief ARS quality adjust encoding
+ */
+typedef enum _sai_ars_profile_quality_adjust_encoding_t
+{
+    /** 2 bit encoding 0 */
+    SAI_ARS_PROFILE_QUALITY_ADJUST_ENCODING_0,
+
+    /** 2 bit encoding 1 */
+    SAI_ARS_PROFILE_QUALITY_ADJUST_ENCODING_1,
+
+    /** 2 bit encoding 2 */
+    SAI_ARS_PROFILE_QUALITY_ADJUST_ENCODING_2,
+
+    /** 2 bit encoding 3 */
+    SAI_ARS_PROFILE_QUALITY_ADJUST_ENCODING_3,
+
+} sai_ars_profile_quality_adjust_encoding_t;
+
+/**
  * @brief Enum defining attributes for ARS profile.
  */
 typedef enum _sai_ars_profile_attr_t
@@ -462,6 +497,71 @@ typedef enum _sai_ars_profile_attr_t
     SAI_ARS_PROFILE_ATTR_MAX_FLOWS,
 
     /**
+     * @brief ARS Path Monitor Profile list
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_ARS_PATH_MONITOR_PROFILE
+     * @default empty
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_PATH_MONITOR_PROFILE_LIST,
+
+    /**
+     * @brief ARS path quality update interval in micro seconds
+     * Update interval of 0 indicates that HW update is disabled for remote link quality
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_PATH_QUALITY_UPDATE,
+
+    /**
+     * @brief ARS path local link quality monitor interval in micro seconds
+     * Monitoring interval of 0 indicates that monitoring of local link quality is disabled
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_PATH_LOCAL_LINK_QUALITY_MONITOR_INTERVAL,
+
+    /**
+     * @brief ARS path local link quality monitor generates message based on the user configured threshold
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_ARS_PROFILE_ATTR_ARS_PATH_MESSAGE_INTERVAL,
+
+    /**
+     * @brief Maximum number of ARS path profile
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_ARS_PROFILE_ATTR_MAX_PATH_QUALITY_MAP,
+
+    /**
+     * @brief ARS scale mode
+     *
+     * @type sai_ars_profile_scale_mode_t
+     * @flags CREATE_AND_SET
+     * @default SAI_ARS_PROFILE_SCALE_MODE_LO
+     */
+    SAI_ARS_PROFILE_ATTR_SCALE_MODE,
+
+    /**
+     * @brief ARS 2 bit quality adjust
+     *
+     * @type sai_ars_profile_quality_adjust_encoding_t
+     * @flags CREATE_AND_SET
+     * @default SAI_ARS_PROFILE_QUALITY_ADJUST_ENCODING_0
+     */
+    SAI_ARS_PROFILE_ATTR_QUALITY_ADJUST_ENCODING,
+
+    /**
      * @brief End of attributes
      */
     SAI_ARS_PROFILE_ATTR_END,
@@ -473,6 +573,111 @@ typedef enum _sai_ars_profile_attr_t
     SAI_ARS_PROFILE_ATTR_CUSTOM_RANGE_END
 
 } sai_ars_profile_attr_t;
+
+/**
+ * @brief Enum defining attributes for ARS path monitor profile.
+ */
+typedef enum _sai_ars_path_monitor_profile_attr_t
+{
+    /**
+     * @brief Start of attributes
+     */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_START,
+
+    /**
+     * @brief Monitoring ports for publisher
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_PORT
+     * @default empty
+     */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_MON_PORT_LIST = SAI_ARS_PATH_MONITOR_PROFILE_ATTR_START,
+
+    /**
+     * @brief ARS Path Message Publish Encap list
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_TAM_COLLECTOR,
+     * @default empty
+     */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_PUB_ENCAP_LIST,
+
+    /**
+     * @brief Remote switch identifier list for monitoring ports
+     * Can be an arbitrary assigned value or a loopback IP address
+     *
+     * @type sai_u32_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_REMOTE_DEVICE_ID_LIST,
+
+    /**
+     * @brief End of attributes
+     */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_END,
+
+    /** Custom range base value */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_CUSTOM_RANGE_START = 0x10000000,
+
+    /** End of custom range base */
+    SAI_ARS_PATH_MONITOR_PROFILE_ATTR_CUSTOM_RANGE_END
+
+} sai_ars_path_monitor_profile_attr_t;
+
+/**
+ * @brief Create ARS Path Monitor Profile
+ *
+ * @param[out] ars_path_monitor_profile_id ARS path monitor profile Id
+ * @param[in] switch_id Switch id
+ * @param[in] attr_count Number of attributes
+ * @param[in] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_create_ars_path_monitor_profile_fn)(
+        _Out_ sai_object_id_t *ars_path_monitor_profile_id,
+        _In_ sai_object_id_t switch_id,
+        _In_ uint32_t attr_count,
+        _In_ const sai_attribute_t *attr_list);
+
+/**
+ * @brief Remove ARS path monitor profile
+ *
+ * @param[in] ars_path_monitor_profile_id ARS path monitor profile id to be removed.
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_remove_ars_path_monitor_profile_fn)(
+        _In_ sai_object_id_t ars_path_monitor_profile_id);
+
+/**
+ * @brief Set attributes for ARS path monitor profile
+ *
+ * @param[in] ars_path_monitor_profile_id ARS path monitor profile Id
+ * @param[in] attr Attribute to set
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_set_ars_path_monitor_profile_attribute_fn)(
+        _In_ sai_object_id_t ars_path_monitor_profile_id,
+        _In_ const sai_attribute_t *attr);
+
+/**
+ * @brief Get attributes of ARS path monitor profile
+ *
+ * @param[in] ars_path_monitor_profile_id ARS Profile id
+ * @param[in] attr_count Number of attributes
+ * @param[inout] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_get_ars_path_monitor_profile_attribute_fn)(
+        _In_ sai_object_id_t ars_path_monitor_profile_id,
+        _In_ uint32_t attr_count,
+        _Inout_ sai_attribute_t *attr_list);
 
 /**
  * @brief Create ARS Profile
@@ -531,10 +736,15 @@ typedef sai_status_t (*sai_get_ars_profile_attribute_fn)(
  */
 typedef struct _sai_ars_profile_api_t
 {
-    sai_create_ars_profile_fn         create_ars_profile;
-    sai_remove_ars_profile_fn         remove_ars_profile;
-    sai_set_ars_profile_attribute_fn  set_ars_profile_attribute;
-    sai_get_ars_profile_attribute_fn  get_ars_profile_attribute;
+    sai_create_ars_profile_fn                     create_ars_profile;
+    sai_remove_ars_profile_fn                     remove_ars_profile;
+    sai_set_ars_profile_attribute_fn              set_ars_profile_attribute;
+    sai_get_ars_profile_attribute_fn              get_ars_profile_attribute;
+
+    sai_create_ars_path_monitor_profile_fn        create_ars_path_monitor_profile;
+    sai_remove_ars_path_monitor_profile_fn        remove_ars_path_monitor_profile;
+    sai_set_ars_path_monitor_profile_attribute_fn set_ars_path_monitor_profile_attribute;
+    sai_get_ars_path_monitor_profile_attribute_fn get_ars_path_monitor_profile_attribute;
 
 } sai_ars_profile_api_t;
 

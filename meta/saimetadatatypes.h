@@ -529,7 +529,13 @@ typedef enum _sai_attr_value_type_t
     /**
      * @brief Attribute value is a list of bit error rates for all lanes in a port.
      */
-    SAI_ATTR_VALUE_TYPE_PRBS_PER_LANE_BIT_ERROR_RATE_LIST
+    SAI_ATTR_VALUE_TYPE_PRBS_PER_LANE_BIT_ERROR_RATE_LIST,
+
+    /**
+     * @brief Attribute value is my address list.
+     */
+    SAI_ATTR_VALUE_TYPE_ARS_ADJUST_LIST,
+
 } sai_attr_value_type_t;
 
 /**

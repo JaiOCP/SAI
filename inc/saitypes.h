@@ -303,6 +303,8 @@ typedef enum _sai_object_type_t
     SAI_OBJECT_TYPE_PREFIX_COMPRESSION_ENTRY = 113,
     SAI_OBJECT_TYPE_SYNCE_CLOCK              = 114,
     SAI_OBJECT_TYPE_PORT_LLR_PROFILE         = 115,
+    SAI_OBJECT_TYPE_ARS_PATH_MONITOR_PROFILE = 116,
+    SAI_OBJECT_TYPE_ARS_QUALITY_MAP          = 117,
 
     /** Must remain in last position */
     SAI_OBJECT_TYPE_MAX,
@@ -1557,6 +1559,66 @@ typedef struct _sai_port_err_status_list_t
 } sai_port_err_status_list_t;
 
 /**
+ * @brief ARS quality adjustment
+ */
+typedef enum _sai_ars_adjust_t
+{
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_ZERO,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_ONE,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_TWO,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_THREE,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_FOUR,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_FIVE,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_SIX,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_ADD_SEVEN,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_ONE,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_TWO,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_THREE,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_FOUR,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_FIVE,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_SIX,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_SUB_SEVEN,
+
+    /** Exponentially weighted moving average */
+    SAI_ARS_ADJUST_PORT_DOWN,
+} sai_ars_adjust_t;
+
+typedef struct _sai_ars_adjust_list_t
+{
+    uint32_t count;
+    sai_ars_adjust_t *list;
+} sai_ars_adjust_list_t;
+
+/**
  * @brief Data Type
  *
  * To use enum values as attribute value is sai_int32_t s32
@@ -1778,6 +1840,9 @@ typedef union _sai_attribute_value_t
 
     /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_PRBS_PER_LANE_BIT_ERROR_RATE_LIST */
     sai_prbs_per_lane_bit_error_rate_list_t prbs_ber_list;
+
+    /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_ARS_ADJUST_LIST */
+    sai_ars_adjust_list_t arsadjustlist;
 
 } sai_attribute_value_t;
 
