@@ -2957,6 +2957,27 @@ typedef enum _sai_port_attr_t
     SAI_PORT_ATTR_PTP_PEER_MEAN_PATH_DELAY,
 
     /**
+     * @brief OFH headers
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_OFH
+     * @default empty
+     */
+    SAI_PORT_ATTR_OFH,
+
+    /**
+     * @brief SAI Virtual Router ID for OFH address space
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_VIRTUAL_ROUTER
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_PORT_ATTR_OFH_VIRTUAL_ROUTER_ID,
+
+    /**
      * @brief End of attributes
      */
     SAI_PORT_ATTR_END,

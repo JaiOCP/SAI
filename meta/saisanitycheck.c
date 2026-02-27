@@ -786,6 +786,7 @@ void check_attr_object_type_provided(
         case SAI_ATTR_VALUE_TYPE_POINTER:
         case SAI_ATTR_VALUE_TYPE_IP_ADDRESS:
         case SAI_ATTR_VALUE_TYPE_IP_PREFIX:
+        case SAI_ATTR_VALUE_TYPE_OFH_ADDR_AND_MASK:
         case SAI_ATTR_VALUE_TYPE_PRBS_RX_STATE:
         case SAI_ATTR_VALUE_TYPE_CHARDATA:
         case SAI_ATTR_VALUE_TYPE_UINT32_RANGE:
@@ -1076,6 +1077,7 @@ void check_attr_default_required(
         case SAI_ATTR_VALUE_TYPE_MAC:
         case SAI_ATTR_VALUE_TYPE_IP_ADDRESS:
         case SAI_ATTR_VALUE_TYPE_IP_PREFIX:
+        case SAI_ATTR_VALUE_TYPE_OFH_ADDR_AND_MASK:
         case SAI_ATTR_VALUE_TYPE_PRBS_RX_STATE:
         case SAI_ATTR_VALUE_TYPE_TIMESPEC:
         case SAI_ATTR_VALUE_TYPE_IPV4:
@@ -3042,6 +3044,7 @@ void check_attr_is_primitive(
         case SAI_ATTR_VALUE_TYPE_INT8:
         case SAI_ATTR_VALUE_TYPE_IP_ADDRESS:
         case SAI_ATTR_VALUE_TYPE_IP_PREFIX:
+        case SAI_ATTR_VALUE_TYPE_OFH_ADDR_AND_MASK:
         case SAI_ATTR_VALUE_TYPE_PRBS_RX_STATE:
         case SAI_ATTR_VALUE_TYPE_MAC:
         case SAI_ATTR_VALUE_TYPE_OBJECT_ID:
@@ -4028,6 +4031,7 @@ void check_non_object_id_object_types()
                 case SAI_ATTR_VALUE_TYPE_UINT32_RANGE:
                 case SAI_ATTR_VALUE_TYPE_IP_ADDRESS:
                 case SAI_ATTR_VALUE_TYPE_IP_PREFIX:
+                case SAI_ATTR_VALUE_TYPE_OFH_ADDR_AND_MASK:
                 case SAI_ATTR_VALUE_TYPE_OBJECT_ID:
                 case SAI_ATTR_VALUE_TYPE_NAT_ENTRY_DATA:
                 case SAI_ATTR_VALUE_TYPE_ENCRYPT_KEY:

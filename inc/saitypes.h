@@ -303,6 +303,8 @@ typedef enum _sai_object_type_t
     SAI_OBJECT_TYPE_PREFIX_COMPRESSION_ENTRY = 113,
     SAI_OBJECT_TYPE_SYNCE_CLOCK              = 114,
     SAI_OBJECT_TYPE_PORT_LLR_PROFILE         = 115,
+    SAI_OBJECT_TYPE_OFH                      = 116,
+    SAI_OBJECT_TYPE_OFH_ROUTE_ENTRY          = 117,
 
     /** Must remain in last position */
     SAI_OBJECT_TYPE_MAX,
@@ -467,6 +469,46 @@ typedef struct _sai_ip_prefix_list_t
     uint32_t count;
     sai_ip_prefix_t *list;
 } sai_ip_prefix_list_t;
+
+typedef enum _sai_ofh_addr_family_t
+{
+    SAI_OFH_ADDR_FAMILY_AFH_T1,
+
+    SAI_OFH_ADDR_FAMILY_AFH_T2,
+
+    SAI_OFH_ADDR_FAMILY_UFH_T1,
+
+    SAI_OFH_ADDR_FAMILY_UFH_T2,
+} sai_ofh_addr_family_t;
+
+/**
+ * @extraparam sai_ofh_addr_family_t ofh_addr_family
+ */
+typedef union _sai_ofh_addr_t
+{
+    /** @validonly ofh_addr_family == SAI_OFH_ADDR_FAMILY_AFH_T1 */
+    sai_mac_t afh_t1;
+
+    /** @validonly ofh_addr_family == SAI_OFH_ADDR_FAMILY_AFH_T2 */
+    sai_mac_t afh_t2;
+
+    /** @validonly ofh_addr_family == SAI_OFH_ADDR_FAMILY_UFH_T1 */
+    sai_uint32_t ufh_t1;
+
+    /** @validonly ofh_addr_family == SAI_OFH_ADDR_FAMILY_UFH_T2 */
+    sai_uint16_t ufh_t2;
+} sai_ofh_addr_t;
+
+typedef struct _sai_ofh_addr_and_mask_t
+{
+    sai_ofh_addr_family_t ofh_addr_family;
+
+    /** @passparam ofh_addr_family */
+    sai_ofh_addr_t ofh_addr;
+
+    /** @passparam ofh_addr_family */
+    sai_ofh_addr_t ofh_mask;
+} sai_ofh_addr_and_mask_t;
 
 /**
  * @brief Attribute data for #SAI_PORT_ATTR_PRBS_RX_STATUS

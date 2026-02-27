@@ -3594,6 +3594,24 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_PTP_SYNTONIZE_ADJUST,
 
     /**
+     * @brief OFH headers
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_OFH
+     * @default empty
+     */
+    SAI_SWITCH_ATTR_OFH,
+
+    /**
+     * @brief OFH header max size
+     *
+     * @type sai_int8_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_OFH_MAX_SIZE,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
