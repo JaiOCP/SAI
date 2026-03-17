@@ -2312,6 +2312,32 @@ typedef sai_status_t (*sai_set_tam_event_action_attribute_fn)(
         _In_ const sai_attribute_t *attr);
 
 /**
+ * @brief Packet drop types.
+ */
+typedef enum _sai_packet_drop_type_t
+{
+    /**
+     * @brief No drops monitored
+     */
+    SAI_PACKET_DROP_TYPE_NONE,
+
+    /**
+     * @brief Ingress drops
+     */
+    SAI_PACKET_DROP_TYPE_INGRESS,
+
+    /**
+     * @brief Egress drops
+     */
+    SAI_PACKET_DROP_TYPE_EGRESS,
+
+    /**
+     * @brief Buffer related drops
+     */
+    SAI_PACKET_DROP_TYPE_BUFFER,
+} sai_packet_drop_type_t;
+
+/**
  * @brief Tam event attributes
  */
 typedef enum _sai_tam_event_attr_t
@@ -2366,6 +2392,42 @@ typedef enum _sai_tam_event_attr_t
      * @default 0
      */
     SAI_TAM_EVENT_ATTR_DSCP_VALUE,
+
+    /**
+     * @brief Enable hardware based learning of events
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     * @validonly SAI_TAM_EVENT_ATTR_TYPE == SAI_TAM_EVENT_TYPE_PACKET_DROP
+     */
+    SAI_TAM_EVENT_ATTR_HW_LEARN,
+
+    /**
+     * @brief Enable hardware based learning of events
+     *
+     * @type sai_packet_drop_type_t
+     * @flags CREATE_AND_SET
+     * @default SAI_PACKET_DROP_TYPE_NONE
+     * @validonly SAI_TAM_EVENT_ATTR_TYPE == SAI_TAM_EVENT_TYPE_PACKET_DROP
+     */
+    SAI_TAM_EVENT_ATTR_PACKET_DROP_TYPE,
+
+    /**
+     * @brief List of supported in drop reasons
+     *
+     * @type sai_s32_list_t sai_in_drop_reason_t
+     * @flags READ_ONLY
+     */
+    SAI_TAM_EVENT_ATTR_IN_DROP_REASON_LIST,
+
+    /**
+     * @brief List of supported out drop reasons
+     *
+     * @type sai_s32_list_t sai_out_drop_reason_t
+     * @flags READ_ONLY
+     */
+    SAI_TAM_EVENT_ATTR_OUT_DROP_REASON_LIST,
 
     /**
      * @brief End of Attributes
@@ -2576,6 +2638,271 @@ typedef void (*sai_tam_event_notification_fn)(
         _In_ const sai_attribute_t *attr_list);
 
 /**
+ * @brief Enum defining learn event.
+ */
+typedef enum _sai_tam_event_learn_entry_attr_t
+{
+    /**
+     * @brief Start of Attributes
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_START,
+
+    /**
+     * @brief Src IPv4 Address
+     *
+     * @type sai_ip4_t
+     * @flags CREATE_AND_SET
+     * @default 0.0.0.0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_SRC_IP = SAI_TAM_EVENT_LEARN_ENTRY_ATTR_START,
+
+    /**
+     * @brief Dst IPv4 Address
+     *
+     * @type sai_ip4_t
+     * @flags CREATE_AND_SET
+     * @default 0.0.0.0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_DST_IP,
+
+    /**
+     * @brief In-Port (mask is not needed)
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_PORT, SAI_OBJECT_TYPE_LAG
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_IN_PORT,
+
+    /**
+     * @brief Out-Port (mask is not needed)
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_PORT, SAI_OBJECT_TYPE_LAG
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_OUT_PORT,
+
+    /**
+     * @brief Source port which could be a physical or LAG port
+     * (mask is not needed)
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_PORT
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_SRC_PORT,
+
+    /**
+     * @brief L4 Src Port
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_L4_SRC_PORT,
+
+    /**
+     * @brief L4 Dst Port
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_L4_DST_PORT,
+
+    /**
+     * @brief Inner L4 Src Port
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_INNER_L4_SRC_PORT,
+
+    /**
+     * @brief Inner L4 Dst Port
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_INNER_L4_DST_PORT,
+
+    /**
+     * @brief EtherType
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_ETHER_TYPE,
+
+    /**
+     * @brief Inner EtherType
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_INNER_ETHER_TYPE,
+
+    /**
+     * @brief IP Protocol
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_IP_PROTOCOL,
+
+    /**
+     * @brief Inner IP Protocol
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_FIELD_INNER_IP_PROTOCOL,
+
+    /**
+     * @brief In drop reason
+     *
+     * @type sai_in_drop_reason_t
+     * @flags CREATE_AND_SET
+     * @default SAI_IN_DROP_REASON_L2_ANY
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_IN_DROP_REASON,
+
+    /**
+     * @brief Out drop reason
+     *
+     * @type sai_out_drop_reason_t
+     * @flags CREATE_AND_SET
+     * @default SAI_OUT_DROP_REASON_L2_ANY
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_OUT_DROP_REASON,
+
+    /**
+     * @brief Counter id to the entry
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_COUNTER
+     * @allownull true
+     * @default SAI_NULL_OBJECT_ID
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_COUNTER_ID,
+
+    /**
+     * @brief End of Attributes
+     */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_END,
+
+    /** Custom range base value */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_CUSTOM_RANGE_START = 0x10000000,
+
+    /** End of custom range base */
+    SAI_TAM_EVENT_LEARN_ENTRY_ATTR_CUSTOM_RANGE_END
+
+} sai_tam_event_learn_entry_attr_t;
+
+/**
+ * @brief Create and return a event learn entry object id
+ *
+ * @param[out] tam_event_learn_entry_id Event object Id
+ * @param[in] switch_id Switch object id
+ * @param[in] attr_count Number of attributes
+ * @param[in] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_create_tam_event_learn_entry_fn)(
+        _Out_ sai_object_id_t *tam_event_learn_entry_id,
+        _In_ sai_object_id_t switch_id,
+        _In_ uint32_t attr_count,
+        _In_ const sai_attribute_t *attr_list);
+
+/**
+ * @brief Deletes a specified event learn entry object
+ *
+ * @param[in] tam_event_learn_entry_id Event object id
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_remove_tam_event_learn_entry_fn)(
+        _In_ sai_object_id_t tam_event_learn_entry_id);
+
+/**
+ * @brief Get values for specified event learn entry object attributes
+ *
+ * @param[in] tam_event_learn_entry_id Event object id
+ * @param[in] attr_count Number of attributes
+ * @param[inout] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_get_tam_event_learn_entry_attribute_fn)(
+        _In_ sai_object_id_t tam_event_learn_entry_id,
+        _In_ uint32_t attr_count,
+        _Inout_ sai_attribute_t *attr_list);
+
+/**
+ * @brief Set value for a specified event learn entry object attribute
+ *
+ * @param[in] tam_event_learn_entry_id Event object id
+ * @param[in] attr Attribute
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_set_tam_event_learn_entry_attribute_fn)(
+        _In_ sai_object_id_t tam_event_learn_entry_id,
+        _In_ const sai_attribute_t *attr);
+
+/**
+ * @brief Notification data format received from SAI TAM event learn callback
+ *
+ * @count attr[attr_count]
+ */
+typedef struct _sai_tam_event_learn_notification_data_t
+{
+    /** Attributes count */
+    uint32_t attr_count;
+
+    /**
+     * @brief Attributes
+     *
+     * @objects SAI_OBJECT_TYPE_TAM_EVENT_LEARN_ENTRY
+     */
+    sai_attribute_t *attr;
+
+} sai_tam_event_learn_notification_data_t;
+
+/**
+ * @brief TAM Event learn notifications
+ *
+ * @count data[count]
+ *
+ * @param[in] count Number of notifications
+ * @param[in] data Pointer to TAM event learn notification data array
+ */
+typedef void (*sai_tam_event_learn_notification_fn)(
+        _In_ uint32_t count,
+        _In_ const sai_tam_event_learn_notification_data_t *data);
+
+/**
  * @brief TAM telemetry data get API
  *
  * @param[in] switch_id SAI Switch object id
@@ -2662,6 +2989,11 @@ typedef struct _sai_tam_api_t
     sai_get_tam_counter_subscription_attribute_fn  get_tam_counter_subscription_attribute;
     sai_bulk_object_create_fn                      create_tam_counter_subscriptions;
     sai_bulk_object_remove_fn                      remove_tam_counter_subscriptions;
+
+    sai_create_tam_event_learn_entry_fn            create_tam_event_learn_entry;
+    sai_remove_tam_event_learn_entry_fn            remove_tam_event_learn_entry;
+    sai_set_tam_event_learn_entry_attribute_fn     set_tam_event_learn_entry_attribute;
+    sai_get_tam_event_learn_entry_attribute_fn     get_tam_event_learn_entry_attribute;
 } sai_tam_api_t;
 
 /**
