@@ -306,6 +306,7 @@ typedef enum _sai_object_type_t
     SAI_OBJECT_TYPE_VIRTUAL_CHANNEL          = 116,
     SAI_OBJECT_TYPE_CBFC_CREDIT_POOL         = 117,
     SAI_OBJECT_TYPE_CBFC_CREDIT_PROFILE      = 118,
+    SAI_OBJECT_TYPE_FW                       = 119,
 
     /** Must remain in last position */
     SAI_OBJECT_TYPE_MAX,
@@ -419,6 +420,33 @@ typedef struct _sai_taps_list_t
     /** List of tap values */
     sai_s32_list_t *list;
 } sai_taps_list_t;
+
+/**
+ * @brief Defines a firmware instance
+ */
+typedef struct _sai_fw_inst_t
+{
+    /** Firmware path */
+    sai_s8_list_t fw_path_name;
+
+    /** Firmware log file path */
+    sai_s8_list_t log_path_name;
+
+    /** Firmware core id */
+    uint8_t  core_id;
+} sai_fw_inst_t;
+
+/**
+ * @brief Defines a list of firmware instances
+ */
+typedef struct _sai_fw_list_t
+{
+    /** Number of firmware instances */
+    uint32_t count;
+
+    /** List of firmware instances */
+    sai_fw_inst_t *list;
+} sai_fw_list_t;
 
 typedef enum _sai_ip_addr_family_t
 {
@@ -1806,6 +1834,11 @@ typedef union _sai_attribute_value_t
     /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_UINT64_RANGE_LIST */
     sai_u64_range_list_t u64rangelist;
 
+    /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_FW_INST */
+    sai_fw_inst_t fwinst;
+
+    /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_FW_LIST */
+    sai_fw_list_t fwlist;
 } sai_attribute_value_t;
 
 /**

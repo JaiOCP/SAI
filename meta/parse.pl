@@ -1750,6 +1750,10 @@ sub ProcessDefaultValue
     {
         WriteSource "$val = { 0 };";
     }
+    elsif ($default =~ /^0$/ and $type =~ /^(sai_fw_inst_t)/)
+    {
+        WriteSource "$val = { 0 };";
+    }
     else
     {
         LogError "invalid default value '$default' on $attr ($type)";
