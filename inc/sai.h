@@ -161,7 +161,6 @@ typedef enum _sai_api_t
     SAI_API_PERFMON          = 56, /**< sai_perfmon_api_t */
     SAI_API_OFH              = 57, /**< sai_ofh_api_t */
     SAI_API_OFH_ROUTE        = 58, /**< sai_ofh_route_api_t */
-
     SAI_API_MAX,                   /**< total number of APIs */
 
     /**
