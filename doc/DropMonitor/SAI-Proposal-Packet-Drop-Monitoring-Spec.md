@@ -563,6 +563,8 @@ ACL table is created with fields enabled that will be used to install the flow e
 
 This table can later be queried by NOS for learned entries using the GET API. Learned entries can be aged out using the SAI_TAM_EVENT_LEARN_ENTRY_ATTR_ACL_ENTRY object.
 
+NOS can also age out the entries using sai_tam_event_learn_entry_attr_t/SAI_OBJECT_TYPE_TAM_EVENT_LEARN_ENTRY object. In such case SAI adapter will dereference the hardware index of the learned entry for aging.
+
 Conceptually there is no SET on the ACL table entries as they are created by SAI adapter.
 SAI adapter should fail any SET operation if done by the NOS.
 
