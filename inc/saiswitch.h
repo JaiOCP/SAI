@@ -3653,6 +3653,59 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_TAM_EVENT_LEARN_NOTIFY,
 
     /**
+     * @brief Link down debounce time in microseconds
+     *
+     * 0 means no delay time so link down events are immediately delivered as usual
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_SWITCH_ATTR_LINK_DOWN_DEBOUNCE_TIMEOUT,
+
+    /**
+     * @brief Link down debounce timeout values supported in microseconds
+     *
+     * @type sai_u32_list_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_LINK_DOWN_DEBOUNCE_TIMEOUT_INTEVALS,
+
+    /**
+     * @brief Link up debounce timeout values supported in microseconds
+     *
+     * @type sai_u32_list_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_LINK_UP_DEBOUNCE_TIMEOUT_INTEVALS,
+
+    /**
+     * @brief Firmware list
+     *
+     * @type sai_fw_list_t
+     * @flags CREATE_ONLY
+     * @default internal
+     */
+    SAI_SWITCH_ATTR_FW_LIST,
+
+    /**
+     * @brief Firmware enabled on the switch
+     *
+     * @type sai_object_list_t
+     * @flags READ_ONLY
+     * @objects SAI_OBJECT_TYPE_FW
+     */
+    SAI_SWITCH_ATTR_FW,
+
+    /**
+     * @brief Maximum number of cores supported
+     *
+     * @type sai_uint8_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_FW_CORES,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
