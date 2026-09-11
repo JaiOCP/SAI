@@ -3680,6 +3680,26 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_LINK_UP_DEBOUNCE_TIMEOUT_INTEVALS,
 
     /**
+     * @brief New packet trim to sender DSCP value
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     * @validonly SAI_SWITCH_ATTR_PACKET_TRIM_DSCP_RESOLUTION_MODE == SAI_PACKET_TRIM_DSCP_RESOLUTION_MODE_DSCP_VALUE
+     */
+    SAI_SWITCH_ATTR_PACKET_TRIM_TO_SENDER_DSCP_VALUE,
+
+    /**
+     * @brief New packet trim to sender TC value
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     * @validonly SAI_SWITCH_ATTR_PACKET_TRIM_DSCP_RESOLUTION_MODE == SAI_PACKET_TRIM_DSCP_RESOLUTION_MODE_FROM_TC
+     */
+    SAI_SWITCH_ATTR_PACKET_TRIM_TO_SENDER_TC_VALUE,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
